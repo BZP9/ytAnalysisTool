@@ -28,11 +28,7 @@ def keyword2vid(keyword: str):
     
     print(f"keyword '{keyword}' to {len(response["items"])} vids")
     for item in response["items"]:
-        # print(f"{item["id"]["videoId"]}")
-        # print(f"    {item["snippet"]["title"]}")
-        # print(f"        {item["snippet"]["channelId"]}")
-        # print(f"            {item["snippet"]["channelTitle"]}")
-        yield {
+        thing = {
             "video": {
                 "id": item["id"]["videoId"],
                 "title": item["snippet"]["title"],
@@ -43,6 +39,7 @@ def keyword2vid(keyword: str):
             },
             "date": item["snippet"]["publishTime"],
         }
+        yield thing
 
 
 if __name__ == "__main__":
