@@ -37,7 +37,7 @@ def keyword2vid(keyword: str):
                 "id": item["snippet"]["channelId"],
                 "title": item["snippet"]["channelTitle"],
             },
-            "date": item["snippet"]["publishTime"],
+            "publishTime": item["snippet"]["publishTime"],
         }
         yield thing
 
