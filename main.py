@@ -1,4 +1,5 @@
-topics = [
+import loader as l
+keywords = [
     '總統',
     '東森 政治',
     '三立 政治',
@@ -17,4 +18,10 @@ topics = [
     '台灣 政治'
 ]
 if __name__ == '__main__':
+    loader = l.loader(keywords)
+    if False: loader.resetSql() ### will remove all tables in database and reset them
+    loader.setUpSql() ### will set up database and tables
+    loader.keywords2vid()
+    loader.vid2Info()
+    loader.info2comment()
     print("finish")

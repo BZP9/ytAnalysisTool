@@ -4,9 +4,9 @@ import googleapiclient.discovery
 import googleapiclient.errors
 from datetime import datetime
 
-scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 load_dotenv()
 DEVELOPER_KEY = os.getenv("DEVELOPER_KEY")# STRANGER DANGER
+scopes = ["https://www.googleapis.com/auth/youtube.force-ssl"]
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 api_service_name = "youtube"
 api_version = "v3"
@@ -82,9 +82,9 @@ def vid2info(vid):
     info = {
         "videoId": response["id"],
         "publishedAt": datetimeConvert(response["snippet"]["publishedAt"]),
-        "viewCount": response["statistics"]["viewCount"],
-        "likeCount": response["statistics"]["likeCount"],
-        "commentCount": response["statistics"]["commentCount"]
+        "viewCount": response["statistics"].get("viewCount", 0),
+        "likeCount": response["statistics"].get("likeCount", 0),
+        "commentCount": response["statistics"].get("commentCount", 0)
     }
     return info
 
@@ -92,8 +92,8 @@ def datetimeConvert(date):
     return datetime.strptime(date, "%Y-%m-%dT%H:%M:%SZ")
 
 if __name__ == "__main__":
-    for item in keyword2vid("蔡英文"):
-        print(item)
-    for item in vid2comment("tREINnJZMJ4"):
-        print(item)
-    print(vid2info("oyEuk8j8imI"))
+    # for item in keyword2vid("蔡英文"):
+    #     print(item)
+    # for item in vid2comment("tREINnJZMJ4"):
+    #     print(item)
+    print(vid2info("_2xa1YsdzGs"))
