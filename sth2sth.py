@@ -19,7 +19,8 @@ def keyword2vid(keyword: str):
         maxResults=100,
         order = "date",
         q=keyword,
-        type="video"
+        type="video",
+        topicId="/m/05qt0",
     )
     response = request.execute()
     # response = response.json()
