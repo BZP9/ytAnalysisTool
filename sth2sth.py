@@ -75,11 +75,23 @@ def vid2comment(vid):
         print(ex)
         
 def vid2info(vid):
+    print(vid)
     request = youtube.videos().list(
         part="snippet,statistics",
         id=vid,
     )
-    response = request.execute()["items"][0]
+    response = request.execute()
+    # response = request.execute()["items"][0]
+    info = {
+        "videoId": vid,
+        "publishedAt": datetimeConvert(),
+        "viewCount": -1,
+        "likeCount": -1,
+        "commentCount": -1
+    }
+    if len(response["items"]) == 0:
+        return info
+    response = response["items"][0]
     info = {
         "videoId": response["id"],
         "publishedAt": datetimeConvert(response["snippet"]["publishedAt"]),
@@ -89,7 +101,9 @@ def vid2info(vid):
     }
     return info
 
-def datetimeConvert(date):
+def datetimeConvert(date=None):
+    if date is None:
+        date = "1970-01-01T00:00:00Z"  # Default fallback value
     return datetime.strptime(date, "%Y-%m-%dT%H:%M:%SZ")
 
 if __name__ == "__main__":
@@ -97,4 +111,4 @@ if __name__ == "__main__":
     #     print(item)
     # for item in vid2comment("tREINnJZMJ4"):
     #     print(item)
-    print(vid2info("_2xa1YsdzGs"))
+    print(vid2info("60gjxMId4Qk"))
